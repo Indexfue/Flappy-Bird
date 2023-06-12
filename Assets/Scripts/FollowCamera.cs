@@ -3,13 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class FollowCamera : MonoBehaviour
 {
+    [SerializeField] private Transform _toFollow;
     [SerializeField] private float _smoothRate;
     [SerializeField] private Vector3 _offset;
     
-    private Transform _toFollow;
     private Vector3 _currentVelocity;
-    
-    public void Initialize(GameObject toFollow) => _toFollow = toFollow.transform;
 
     private void LateUpdate()
     {
