@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using FSM.States;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,7 +14,11 @@ namespace Pool
         private Coroutine _spawnRoutine;
         private bool _isSpawnRoutineStarted;
 
-        private void Start() => Initializate(_prefab);
+        private void Start()
+        {
+            Initializate(_prefab);
+            Spawn();
+        }
 
         private void Spawn() => _spawnRoutine = StartCoroutine(SpawnRoutine());
 
@@ -32,6 +34,11 @@ namespace Pool
         private void SetObject(GameObject obj, Vector3 position)
         {
             obj.SetActive(true);
+            foreach (Transform child in obj.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+            
             obj.transform.position = position;
         }
         

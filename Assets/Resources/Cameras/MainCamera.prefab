@@ -107,4 +107,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toFollow: {fileID: 2530388865541238339, guid: 79bc2e9cea027db43859a70e7554ab75, type: 3}
   _smoothRate: 0
-  _offset: {x: -3, y: 0, z: -10}
+  _offset: {x: 0, y: 0, z: -10}

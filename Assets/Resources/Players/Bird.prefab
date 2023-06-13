@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8690143131182497150}
   - component: {fileID: 2051766223789824233}
   - component: {fileID: 4014870183149052333}
+  - component: {fileID: 1847957651078354555}
   m_Layer: 0
   m_Name: Bird
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &65893559501928616
 SpriteRenderer:
@@ -197,3 +198,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _jumpForce: 5
+--- !u!114 &1847957651078354555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3626492417704904858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae6327f542a726240bea3b7f91389a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
