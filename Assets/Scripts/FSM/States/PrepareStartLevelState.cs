@@ -1,39 +1,38 @@
-using UI;
+using Players;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 namespace FSM.States
 {
-    public class EndLevelState : ILevelState
+    public class PrepareStartLevelState : ILevelState
     {
         private readonly LevelStateMachine _levelStateMachine;
         
         public static event UnityAction Entered;
         public static event UnityAction Exited;
 
-        public EndLevelState(LevelStateMachine levelStateMachine)
+        public PrepareStartLevelState(LevelStateMachine levelStateMachine)
         {
             _levelStateMachine = levelStateMachine;
         }
         
         public void Enter()
         {
+            Debug.Log("Enter Prepare");
+            PlayerInput.InputHandled += OnInputHandle;
             Entered?.Invoke();
-            LevelEndUI.OnOkClicked += OnOkClick;
-            Debug.Log("Enter End state");
         }
 
         public void Exit()
         {
+            Debug.Log("Exit Tutorial");
+            PlayerInput.InputHandled -= OnInputHandle;
             Exited?.Invoke();
-            LevelEndUI.OnOkClicked -= OnOkClick;
-            Debug.Log("Exit End state");
         }
 
-        private void OnOkClick()
+        private void OnInputHandle()
         {
-            SceneManager.LoadScene(0);
+            _levelStateMachine.EnterIn<StartLevelState>();
         }
     }
 }

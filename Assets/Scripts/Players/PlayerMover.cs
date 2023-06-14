@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Player
+namespace Players
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput))]
     public class PlayerMover : MonoBehaviour
@@ -23,11 +22,6 @@ namespace Player
         {
             _rigidbody.velocity = new Vector2(0, 0);
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
-        }
-
-        private void OnDie()
-        {
-            
         }
     }
 }

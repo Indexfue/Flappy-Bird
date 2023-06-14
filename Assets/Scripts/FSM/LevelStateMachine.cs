@@ -12,7 +12,7 @@ public class LevelStateMachine
         _states = new Dictionary<Type, ILevelState>()
         {
             [typeof(InitializeLevelState)] = new InitializeLevelState(this),
-            [typeof(TutorialLevelState)] = new TutorialLevelState(this),
+            [typeof(PrepareStartLevelState)] = new PrepareStartLevelState(this),
             [typeof(BeginningScreenLevelState)] = new BeginningScreenLevelState(this),
             [typeof(StartLevelState)] = new StartLevelState(this),
             [typeof(EndLevelState)] = new EndLevelState(this)

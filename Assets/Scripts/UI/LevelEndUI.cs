@@ -6,21 +6,21 @@ using UnityEngine.Events;
 namespace UI
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class LevelBeginningUI : MonoBehaviour, IElementUI
+    public class LevelEndUI : MonoBehaviour, IElementUI
     {
-        public static event UnityAction OnPlayClicked;
-        public static event UnityAction OnLeaderboardClicked;
+        public static event UnityAction OnOkClicked;
+        public static event UnityAction OnShareClicked;
 
         private void OnEnable()
         {
-            BeginningScreenLevelState.Entered += ShowView;
-            BeginningScreenLevelState.Exited += HideView;
+            EndLevelState.Entered += ShowView;
+            EndLevelState.Exited += HideView;
         }
 
         private void OnDisable()
         {
-            BeginningScreenLevelState.Entered -= ShowView;
-            BeginningScreenLevelState.Exited -= HideView;
+            EndLevelState.Entered -= ShowView;
+            EndLevelState.Exited -= HideView;
         }
         
         public void ShowView()
@@ -36,8 +36,8 @@ namespace UI
             GetComponent<CanvasGroup>().interactable = false;
         }
 
-        public void OnPlayButtonClick() => OnPlayClicked?.Invoke();
+        public void OnOkButtonClick() => OnOkClicked?.Invoke();
 
-        public void OnLeaderboardButtonClick() => OnLeaderboardClicked?.Invoke();
+        public void OnShareButtonClick() => OnShareClicked?.Invoke();
     }
 }

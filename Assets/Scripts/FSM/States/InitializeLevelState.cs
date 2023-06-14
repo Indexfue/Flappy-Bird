@@ -1,10 +1,16 @@
 using UnityEngine;
+using UnityEngine.Events;
+using FSM.States;
+using UI;
 
 namespace FSM.States
 {
     public class InitializeLevelState : ILevelState
     {
         private readonly LevelStateMachine _levelStateMachine;
+        
+        public static event UnityAction Entered;
+        public static event UnityAction Exited;
 
         public InitializeLevelState(LevelStateMachine levelStateMachine)
         {
@@ -16,7 +22,7 @@ namespace FSM.States
             Debug.Log("Enter initialize");
             Initialize();
             
-            _levelStateMachine.EnterIn<TutorialLevelState>();
+            _levelStateMachine.EnterIn<BeginningScreenLevelState>();
         }
 
         public void Exit()
@@ -26,7 +32,9 @@ namespace FSM.States
 
         private void Initialize()
         {
-
+            //Object UI = Resources.Load(GameConstants.UI_ELEMENTS_PATH);
+            //Object.Instantiate(UI);
+            GameObject.FindObjectOfType<UIEventHandler>().Initialize();
         }
     }
 }

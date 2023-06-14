@@ -1,7 +1,7 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using FSM.States;
 
 namespace Pool
 {
@@ -17,7 +17,16 @@ namespace Pool
         private void Start()
         {
             Initializate(_prefab);
-            Spawn();
+        }
+        
+        private void OnEnable()
+        {
+            StartLevelState.Entered += OnLevelStart;
+        }
+
+        private void OnDisable()
+        {
+            StartLevelState.Entered -= OnLevelStart;
         }
 
         private void Spawn() => _spawnRoutine = StartCoroutine(SpawnRoutine());
@@ -45,6 +54,7 @@ namespace Pool
         private IEnumerator SpawnRoutine()
         {
             _isSpawnRoutineStarted = true;
+            yield return new WaitForSeconds(1.5f);
             
             while (true)
             {
@@ -58,6 +68,12 @@ namespace Pool
 
                 yield return null;
             }
+        }
+
+        private void OnLevelStart()
+        {
+            Debug.Log("Hui sosi");
+            Spawn();
         }
     }
 }

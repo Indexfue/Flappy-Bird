@@ -1,4 +1,5 @@
 using UnityEngine;
+using FSM.States;
 
 [RequireComponent(typeof(Camera))]
 public class FollowXAxisCamera : MonoBehaviour
@@ -8,6 +9,21 @@ public class FollowXAxisCamera : MonoBehaviour
     [SerializeField] private Vector3 _offset;
     
     private Vector3 _currentVelocity;
+    
+    private readonly Vector3 _beginScreenOffset = new Vector3(7, 0, -10);
+    private readonly Vector3 _levelStartOffset = new Vector3(3, 0, -10);
+
+    private void OnEnable()
+    {
+        BeginningScreenLevelState.Entered += OnLevelBeginScreen;
+        PrepareStartLevelState.Entered += OnLevelPrepareStart;
+    }
+
+    private void OnDisable()
+    {
+        BeginningScreenLevelState.Entered -= OnLevelBeginScreen;
+        PrepareStartLevelState.Entered -= OnLevelPrepareStart;
+    }
 
     private void LateUpdate()
     {
@@ -19,5 +35,15 @@ public class FollowXAxisCamera : MonoBehaviour
             ref _currentVelocity, 
             _smoothRate
         );
+    }
+    
+    private void OnLevelBeginScreen()
+    {
+        _offset = _beginScreenOffset;
+    }
+
+    private void OnLevelPrepareStart()
+    {
+        _offset = _levelStartOffset;
     }
 }
