@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using FSM.States;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Players
 {
@@ -14,6 +15,8 @@ namespace Players
         private Rigidbody2D _rigidbody;
         private bool _isFlyRoutineStarted;
         private Coroutine _flyRoutine;
+
+        public static event UnityAction Jumped;
         
         public float Speed { get => _speed; }
         public float JumpForce { get => _jumpForce; }
@@ -38,6 +41,7 @@ namespace Players
         {
             _rigidbody.velocity = new Vector2(0, 0);
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            Jumped?.Invoke();
         }
         
         private void Fly() => _flyRoutine = StartCoroutine(FlyRoutine());
