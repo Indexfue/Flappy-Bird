@@ -25,7 +25,6 @@ namespace UI
         
         public void ShowView()
         {
-            Debug.Log("ShowView");
             GetComponent<CanvasGroup>().alpha = 1;
             GetComponent<CanvasGroup>().interactable = true;
         } 

@@ -1,4 +1,5 @@
 using Players;
+using Scores;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,7 @@ namespace FSM.States
     public class StartLevelState : ILevelState
     {
         private readonly LevelStateMachine _levelStateMachine;
+        private readonly Score _score;
         
         public static event UnityAction Entered;
         public static event UnityAction Exited;
@@ -14,6 +16,7 @@ namespace FSM.States
         public StartLevelState(LevelStateMachine levelStateMachine)
         {
             _levelStateMachine = levelStateMachine;
+            _score = new Score();
         }
         
         public void Enter()

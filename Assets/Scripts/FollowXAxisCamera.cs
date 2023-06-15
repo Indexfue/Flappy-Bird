@@ -10,8 +10,8 @@ public class FollowXAxisCamera : MonoBehaviour
     
     private Vector3 _currentVelocity;
     
-    private readonly Vector3 _beginScreenOffset = new Vector3(7, 0, -10);
-    private readonly Vector3 _levelStartOffset = new Vector3(3, 0, -10);
+    private readonly Vector3 _beginScreenOffset = new Vector3(3.5f, 0, -10);
+    private readonly Vector3 _levelStartOffset = new Vector3(2.5f, 0, -10);
 
     private void OnEnable()
     {

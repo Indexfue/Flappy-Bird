@@ -33,7 +33,7 @@ namespace FSM.States
 
         private void OnOkClick()
         {
-            SceneManager.LoadScene(0);
+            _levelStateMachine.EnterIn<PrepareStartLevelState>();
         }
     }
 }

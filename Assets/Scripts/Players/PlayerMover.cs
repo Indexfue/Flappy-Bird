@@ -1,3 +1,6 @@
+using System;
+using System.Collections;
+using FSM.States;
 using UnityEngine;
 
 namespace Players
@@ -9,19 +12,54 @@ namespace Players
         [SerializeField] private float _jumpForce;
 
         private Rigidbody2D _rigidbody;
+        private bool _isFlyRoutineStarted;
+        private Coroutine _flyRoutine;
+        
+        public float Speed { get => _speed; }
+        public float JumpForce { get => _jumpForce; }
 
-        private void Start()
+        private void Start() => _rigidbody = GetComponent<Rigidbody2D>();
+
+        private void OnEnable()
         {
-            _rigidbody = GetComponent<Rigidbody2D>();
             PlayerInput.InputHandled += Jump;
+            StartLevelState.Entered += Fly;
+            EndLevelState.Entered += Stop;
         }
 
-        private void Update() => transform.Translate(Vector3.right * _speed * Time.deltaTime);
+        private void OnDisable()
+        {
+            PlayerInput.InputHandled -= Jump;
+            StartLevelState.Entered -= Fly;
+            EndLevelState.Entered -= Stop;
+        }
 
         private void Jump()
         {
             _rigidbody.velocity = new Vector2(0, 0);
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+        }
+        
+        private void Fly() => _flyRoutine = StartCoroutine(FlyRoutine());
+
+        private void Stop()
+        {
+            if (_isFlyRoutineStarted)
+            {
+                StopCoroutine(_flyRoutine);
+                _isFlyRoutineStarted = false;
+            }
+        }
+
+        private IEnumerator FlyRoutine()
+        {
+            _isFlyRoutineStarted = true;
+            
+            while (true)
+            {
+                transform.Translate(Vector3.right * _speed * Time.deltaTime);
+                yield return null;
+            }
         }
     }
 }

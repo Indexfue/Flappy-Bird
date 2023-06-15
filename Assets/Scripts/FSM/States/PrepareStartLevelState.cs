@@ -1,3 +1,5 @@
+using System.Linq;
+using Obstacles;
 using Players;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,6 +21,7 @@ namespace FSM.States
         public void Enter()
         {
             Debug.Log("Enter Prepare");
+            ClearObstacles();
             PlayerInput.InputHandled += OnInputHandle;
             Entered?.Invoke();
         }
@@ -33,6 +36,16 @@ namespace FSM.States
         private void OnInputHandle()
         {
             _levelStateMachine.EnterIn<StartLevelState>();
+        }
+
+        private void ClearObstacles()
+        {
+            Pipe[] pipes = Object.FindObjectsOfType<Pipe>();
+
+            foreach (var pipe in pipes)
+            {
+                pipe.gameObject.SetActive(false);
+            }
         }
     }
 }

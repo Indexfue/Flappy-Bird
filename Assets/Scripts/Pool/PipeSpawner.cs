@@ -22,11 +22,13 @@ namespace Pool
         private void OnEnable()
         {
             StartLevelState.Entered += OnLevelStart;
+            EndLevelState.Entered += Stop;
         }
 
         private void OnDisable()
         {
             StartLevelState.Entered -= OnLevelStart;
+            EndLevelState.Entered -= Stop;
         }
 
         private void Spawn() => _spawnRoutine = StartCoroutine(SpawnRoutine());
@@ -72,8 +74,12 @@ namespace Pool
 
         private void OnLevelStart()
         {
-            Debug.Log("Hui sosi");
             Spawn();
+        }
+
+        private void OnLevelEnd()
+        {
+            Stop();
         }
     }
 }
