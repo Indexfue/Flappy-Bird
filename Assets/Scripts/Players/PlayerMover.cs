@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using FSM.States;
 using UnityEngine;
@@ -6,7 +5,8 @@ using UnityEngine.Events;
 
 namespace Players
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInput))]
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(PlayerInput))]
     public class PlayerMover : MonoBehaviour
     {
         [SerializeField] private float _speed;

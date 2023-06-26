@@ -13,7 +13,11 @@ namespace UI
     {
         [SerializeField] private TMP_Text _scoreText;
 
+        private CanvasGroup _canvasGroup;
+
         public static event UnityAction OnPauseClicked;
+
+        private void Start() => _canvasGroup = GetComponent<CanvasGroup>();
 
         private void OnEnable()
         {
@@ -29,17 +33,15 @@ namespace UI
             Score.ScoreChanged -= OnScoreChange;
         }
 
-        public void ShowView()
+        private void CanvasViewModify(bool state)
         {
-            GetComponent<CanvasGroup>().alpha = 1;
-            GetComponent<CanvasGroup>().interactable = true;
-        } 
-
-        public void HideView()
-        {
-            GetComponent<CanvasGroup>().alpha = 0;
-            GetComponent<CanvasGroup>().interactable = false;
+            _canvasGroup.alpha = state ? 1 : 0;
+            _canvasGroup.interactable = state;
         }
+
+        public void ShowView() => CanvasViewModify(true);
+
+        public void HideView() => CanvasViewModify(false);
 
         public void OnScoreChange(int value) => _scoreText.text = value.ToString();
         

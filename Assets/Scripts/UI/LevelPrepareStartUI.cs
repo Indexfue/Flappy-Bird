@@ -1,3 +1,4 @@
+using System;
 using FSM.States;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,6 +9,10 @@ namespace UI
     [RequireComponent(typeof(CanvasGroup))]
     public class LevelPrepareStartUI : MonoBehaviour, IElementUI
     {
+        private CanvasGroup _canvasGroup;
+
+        private void Start() => _canvasGroup = GetComponent<CanvasGroup>();
+
         private void OnEnable()
         {
             PrepareStartLevelState.Entered += ShowView;
@@ -20,17 +25,14 @@ namespace UI
             PrepareStartLevelState.Exited -= HideView;
         }
         
-        public void ShowView()
+        private void CanvasViewModify(bool state)
         {
-            Debug.Log("ShowView");
-            GetComponent<CanvasGroup>().alpha = 1;
-            GetComponent<CanvasGroup>().interactable = true;
-        } 
-
-        public void HideView()
-        {
-            GetComponent<CanvasGroup>().alpha = 0;
-            GetComponent<CanvasGroup>().interactable = false;
+            _canvasGroup.alpha = state ? 1 : 0;
+            _canvasGroup.interactable = state;
         }
+
+        public void ShowView() => CanvasViewModify(true);
+
+        public void HideView() => CanvasViewModify(false);
     }
 }

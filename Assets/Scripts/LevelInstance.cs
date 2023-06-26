@@ -1,3 +1,4 @@
+using FSM;
 using FSM.States;
 using UnityEngine;
 
@@ -9,6 +10,6 @@ public class LevelInstance : MonoBehaviour
     {
         _levelStateMachine = new LevelStateMachine();
         
-        _levelStateMachine.EnterIn<InitializeLevelState>();
+        _levelStateMachine.EnterIn<BeginningScreenLevelState>();
     }
 }

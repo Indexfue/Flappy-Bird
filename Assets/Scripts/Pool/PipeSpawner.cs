@@ -14,11 +14,8 @@ namespace Pool
         private Coroutine _spawnRoutine;
         private bool _isSpawnRoutineStarted;
 
-        private void Start()
-        {
-            Initializate(_prefab);
-        }
-        
+        private void Start() => Initialize(_prefab);
+
         private void OnEnable()
         {
             StartLevelState.Entered += OnLevelStart;
@@ -72,14 +69,8 @@ namespace Pool
             }
         }
 
-        private void OnLevelStart()
-        {
-            Spawn();
-        }
+        private void OnLevelStart() => Spawn();
 
-        private void OnLevelEnd()
-        {
-            Stop();
-        }
+        private void OnLevelEnd() => Stop();
     }
 }

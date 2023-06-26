@@ -1,4 +1,3 @@
-using System;
 using FSM.States;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,9 +6,14 @@ using Obstacles;
 namespace Players
 {
     [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent(typeof(Rigidbody2D))]
     public class Player : MonoBehaviour
     {
+        private Rigidbody2D _rigidbody;
+        
         public static event UnityAction Died;
+
+        private void Start() => _rigidbody = GetComponent<Rigidbody2D>();
 
         private void OnEnable()
         {
@@ -29,7 +33,7 @@ namespace Players
 
         private void Die() => Died?.Invoke();
 
-        private void SetSimulatePhysics(bool state) => GetComponent<Rigidbody2D>().simulated = state;
+        private void SetSimulatePhysics(bool state) => _rigidbody.simulated = state;
 
         private void SetCoords(float x, float y) => transform.position = new Vector3(x, y);
 

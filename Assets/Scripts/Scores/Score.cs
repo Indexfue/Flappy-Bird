@@ -1,8 +1,6 @@
-using System;
 using FSM.States;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace Scores
 {
@@ -36,14 +34,15 @@ namespace Scores
 
         public Sprite GetSpriteByScore()
         {
+            
             if (_currentScore <= 10)
-                return _medalSprites[0];
+                return _medalSprites[(int)Medal.BronzeMedal];
             if (_currentScore <= 30)
-                return _medalSprites[1];
+                return _medalSprites[(int)Medal.IronMedal];
             if (_currentScore <= 50)
-                return _medalSprites[2];
+                return _medalSprites[(int)Medal.GoldMedal];
 
-            return _medalSprites[3];
+            return _medalSprites[(int)Medal.PlatinumMedal];
         }
 
         private void OnEnable()
