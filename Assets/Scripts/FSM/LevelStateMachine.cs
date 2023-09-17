@@ -2,30 +2,33 @@ using System;
 using System.Collections.Generic;
 using FSM.States;
 
-public class LevelStateMachine
+namespace FSM
 {
-    private Dictionary<Type, ILevelState> _states;
-    private ILevelState _currentState;
-
-    public LevelStateMachine()
+    public class LevelStateMachine
     {
-        _states = new Dictionary<Type, ILevelState>()
-        {
-            [typeof(InitializeLevelState)] = new InitializeLevelState(this),
-            [typeof(PrepareStartLevelState)] = new PrepareStartLevelState(this),
-            [typeof(BeginningScreenLevelState)] = new BeginningScreenLevelState(this),
-            [typeof(StartLevelState)] = new StartLevelState(this),
-            [typeof(EndLevelState)] = new EndLevelState(this)
-        };
-    }
+        private Dictionary<Type, ILevelState> _states;
+        private ILevelState _currentState;
 
-    public void EnterIn<TState>() where TState : ILevelState
-    {
-        if (_states.TryGetValue(typeof(TState), out ILevelState state))
+        public LevelStateMachine()
         {
-            _currentState?.Exit();
-            _currentState = state;
-            _currentState.Enter();
+            _states = new Dictionary<Type, ILevelState>()
+            {
+                [typeof(PrepareStartLevelState)] = new PrepareStartLevelState(this),
+                [typeof(BeginningScreenLevelState)] = new BeginningScreenLevelState(this),
+                [typeof(StartLevelState)] = new StartLevelState(this),
+                [typeof(EndLevelState)] = new EndLevelState(this)
+            };
+        }
+
+        public void EnterIn<TState>() where TState : ILevelState
+        {
+            if (_states.TryGetValue(typeof(TState), out ILevelState state))
+            {
+                _currentState?.Exit();
+                _currentState = state;
+                _currentState.Enter();
+            }
         }
     }
+   
 }

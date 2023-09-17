@@ -9,9 +9,9 @@ namespace Pool
         [SerializeField] private int _capacity;
         [SerializeField] private GameObject _container;
 
-        private List<GameObject> _objects = new List<GameObject>();
+        private readonly List<GameObject> _objects = new List<GameObject>();
 
-        protected void Initializate(GameObject prefab)
+        protected void Initialize(GameObject prefab)
         {
             for (int i = 0; i < _capacity; i++)
             {
